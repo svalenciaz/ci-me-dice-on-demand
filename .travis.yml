@@ -30,9 +30,9 @@ jobs:
     script: /bin/true
     deploy:
       <<: *heroku
-      app: ci-me-dice-on-demand-production
+      app: ci-me-dice-on-demand-prod
   - stage: test production
-    script: curl http://ci-me-dice-on-demand-production.herokuapp.com
+    script: curl http://ci-me-dice-on-demand-prod.herokuapp.com
   - stage: notify
     script: echo "sending Slack notification..."
 notifications:
