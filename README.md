@@ -1,30 +1,38 @@
-[![Build Status](https://travis-ci.com/srujandeshpande/dice-on-demand.svg?branch=master)](https://travis-ci.com/srujandeshpande/dice-on-demand)
-# dice-on-demand
-Get a flexible dice on demand! View the step-by-step procedure of of to make this app at https://medium.com/@srujandeshpande/building-a-python3-flask-web-app-with-ci-cd-using-travis-ci-and-heroku-10529f9d27a
+# ci-me-dice-on-demand
+Sample Python app for learning CI. You will get a flexible dice on demand! 
 
-This application is writen and Python and uses Flask as the web framework. It serves a single HTML page.  
+This application is written in Python and uses Flask as the web framework. It serves a single HTML page.  
 Gunicorn is used for the production server.  
 Continous Integration is managed using Travis-CI  
-Continous Deployement is managed using Heroku  
+Continous Deployment is managed using Heroku  
 
-Test out this app at http://dice-on-demand.herokuapp.com/  
-
-# Installation 
-
-1. Clone this repo, and enter it
-2. Execute this -
+# :page_with_curl: Instructions
+1. Clone this repo
+2. Navigate to the directory
+3. Execute this:
 ```
+# This will create and activate a virtualenv. Using a virtual environment allows you to manage your project’s dependencies without messing with system-level files shared by all applications.
+python3 -m venv venv
+source venv/bin/activate
+# Install dependencies
 pip install -r requirements.txt
 # or if you're still using python 2
 pip3 install -r requirements.txt
 ```
 
-3. Now that all the dependencies are installed, we can run the program!
+Now that all dependencies are installed, we can run the program!
+
+4. To test the app:
 ```
-flask run
+python3 -m pytest -v tests/test_dice.py
+```
+5. To run the app:
+```
+# You can define FLASK_ENV environment variable to automatically reload your app when changes are detected so you don't need to restart it
+FLASK_ENV=development flask run
 ```
 
-4. Go to the URL provided by the app (i.e. `http://localhost:5000`)
+6. Go to the URL provided by the app (i.e. `http://localhost:5000`)
 
 # Usage
 
@@ -33,3 +41,35 @@ flask run
 3. You should see a message on the screen - "You Rolled a ..."
 4. That's it!
 
+# :mortar_board: Your task
+- Clone this repo
+- Create a simple CI pipeline for this application on [Travis CI](https://docs.travis-ci.com/) with (at least) the following steps:
+    - Checkout
+    - Test
+    - Slack notification on success or failure
+    - Deploy this app to [Heroku](https://www.heroku.com/) on success (yay! Continuous Deployment!)
+- Bonus points:
+    - Add the [Travis status image](https://docs.travis-ci.com/user/status-images/) to your Readme
+    - Add Pull Requests flows to your CI
+    - Build a container for your app in your CI flow
+    - Deploy the container to Heroku
+
+## Deliverable
+Send us:
+- Your repo URL
+- Your Travis URL
+- Your deployed app URL
+
+# :shipit: Suggestions
+- Read (at least) the [Travis CI Core concepts for Beginners](https://docs.travis-ci.com/user/for-beginners/) and the [Travis CI tutorial](https://docs.travis-ci.com/user/tutorial/). 
+    - Ask yourself, if we didn't provide these links, would you have looked for them?
+    - How should you approach a completely new tool?
+    - Look for the Slack and Heroku integrations in the Travis docs, they are very simple to navigate and easy to follow
+- Google *everything* you don't know (Gradle, Travis, and Heroku are probably new tools for you, do you understand their purpose?)
+- Remember, you cannot automate something you haven't done it manually first (I mean, you could, but you would struggle more than is necessary)
+- Send too many Slack notifications and people will start ignoring them (nobody wants to see your 20-something attempts at setting up Slack notifications, use a test channel or your private conversation)
+
+# :safety_vest: Hint
+You need to connect your GitHub (or any VCS) account with [Travis CI](https://app.travis-ci.com/), investigate about stages, phases and jobs (at least) in Travis-CI and how to write a build pipeline that deploys to Heroku (CD), send build notifications on success/error using Slack. Also, using environment variables in Travis-CI will be needed. Good luck!
+
+PS. The **Procfile** is empty but you will need it also :) Investigate why.
