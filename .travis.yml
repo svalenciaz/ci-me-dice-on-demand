@@ -10,11 +10,13 @@ jobs:
   include:
   - stage: checkout
     script: echo "nothing to do"
+    before_install: skip
   - stage: test
     script: 
       - python3 -m pytest -v tests/test_dice.py
   - stage: build
     script: echo "nothing to do"
+    before_install: skip
   - stage: deploy to staging
     script: skip
     deploy:
@@ -29,10 +31,12 @@ jobs:
   - stage: deploy to production
     script: /bin/true
     deploy:
-      <<: *heroku
+      provider: heroku
+      strategy: api
       app: ci-me-dice-on-demand-prod
+      api_key: "$HEROKU_AUTH_TOKEN"
       on:
-        - branch: solution
+        - branch: master
   - stage: test production
     script: curl http://ci-me-dice-on-demand-prod.herokuapp.com
   - stage: notify
