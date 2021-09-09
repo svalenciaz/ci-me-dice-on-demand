@@ -23,7 +23,7 @@ jobs:
       strategy: api
       app: ci-me-dice-on-demand-staging
       api_key: "$HEROKU_AUTH_TOKEN"
-      on: wwc-training-demo
+      on: wwc-training-demo-python
   - stage: test staging
     script: curl http://ci-me-dice-on-demand-staging.herokuapp.com
   - stage: deploy to production
