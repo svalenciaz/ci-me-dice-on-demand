@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dice On Demand</title>
+  <style>
+    #output{
+      margin-top: 20%;
+      margin-left: 30%;
+      font-size: 40px;
+    }
+    #input{
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="input">
+  <label>Enter the number of sides of the dice</label>
+  <input type="number" value="6" min="0"  id="dicesides"></input>
+  <button onclick="rollDice()">Roll</button>
+  </div>
+  <br>
+  <div id="output">
+  <h1>You Rolled a <strong id="ans"></strong></h1>
+  </div>
+  
+
+  <script>
+    function rollDice()
+    {
+      //Get the value of number of sides of the dice
+      var num = document.getElementById("dicesides").value;
+      //Calculate roll
+      if(num < 0 ){
+        alert("number must be bigger than zero")
+      } else{
+      var ans = Math.floor((Math.random() * num) + 1);
+      //Print roll
+      document.getElementById("ans").innerHTML = ans;
+    }}
+  </script>
+</body>
+</html>
