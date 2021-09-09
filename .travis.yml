@@ -13,7 +13,6 @@ jobs:
   - stage: test
     script: 
       - python3 -m pytest -v tests/test_dice.py
-      - flake8
   - stage: build
     script: echo "nothing to do"
   - stage: deploy to staging
