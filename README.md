@@ -1,6 +1,6 @@
+# ci-me-dice-on-demand
 [![Build Status](https://app.travis-ci.com/camilotorres97/ci-me-dice-on-demand.svg?branch=main)](https://app.travis-ci.com/camilotorres97/ci-me-dice-on-demand)
 
-# ci-me-dice-on-demand
 Sample Python app for learning CI. You will get a flexible dice on demand! 
 
 This application is written in Python and uses Flask as the web framework. It serves a single HTML page.  
