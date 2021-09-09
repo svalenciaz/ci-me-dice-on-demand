@@ -31,6 +31,8 @@ jobs:
     deploy:
       <<: *heroku
       app: ci-me-dice-on-demand-prod
+      on:
+        - branch: solution
   - stage: test production
     script: curl http://ci-me-dice-on-demand-prod.herokuapp.com
   - stage: notify
