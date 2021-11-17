@@ -1,6 +1,9 @@
 language: python
 python:
 - 3.9
+before_install:
+  - echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
+  - git lfs pull
 install:
 - pip install -r requirements.txt
 jobs:
