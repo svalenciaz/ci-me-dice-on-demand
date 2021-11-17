@@ -19,6 +19,8 @@ jobs:
         provider: heroku
         app: ci-dice-svalenciaz-staging
         api_key: $HEROKU_AUTH_TOKEN
+        on:
+          all_branches: true
     - stage: test staging
       script: 'curl http://ci-dice-svalenciaz-staging.herokuapp.com'
     - stage: deploy to production
@@ -26,5 +28,7 @@ jobs:
       deploy:
         <<: *heroku
         app: ci-dice-svalenciaz-production
+        on:
+          all_branches: true
     - stage: test production
       script: 'curl http://ci-dice-svalenciaz-production.herokuapp.com'
