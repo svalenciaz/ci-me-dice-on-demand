@@ -1,34 +1,32 @@
-languaje: python
+language: python
 python:
-  - 3.9
-
+- 3.9
 install:
-  - pip install -r requirements.txt
-
-script:
-  - python3 -m pytest -v tests/test_dice.py
-
-
+- pip install -r requirements.txt
 jobs:
   include:
-    - stage: unit tests
-      script: python3 -m pytest -v tests/test_dice.py
-    - stage: deploy to staging
-      script: skip
-      deploy: &heroku
-        provider: heroku
-        app: ci-dice-svalenciaz-staging
-        api_key: $HEROKU_AUTH_TOKEN
-        on:
-          all_branches: true
-    - stage: test staging
-      script: 'curl http://ci-dice-svalenciaz-staging.herokuapp.com'
-    - stage: deploy to production
-      script: skip
-      deploy:
-        <<: *heroku
-        app: ci-dice-svalenciaz-production
-        on:
-          all_branches: true
-    - stage: test production
-      script: 'curl http://ci-dice-svalenciaz-production.herokuapp.com'
+  - stage: Unit tests
+    script: python3 -m pytest -v tests/test_dice.py
+  - stage: Deploy to staging
+    script: skip
+    deploy:
+      provider: heroku
+      app: ci-dice-svalenciaz-staging
+      api_key: "$HEROKU_AUTH_TOKEN"
+      on:
+        all_branches: true
+  - stage: test staging
+    script: curl http://ci-dice-svalenciaz-staging.herokuapp.com
+  - stage: deploy to production
+    script: skip
+    deploy:
+      provider: heroku
+      app: ci-dice-svalenciaz-production
+      api_key: "$HEROKU_AUTH_TOKEN"
+      on:
+        all_branches: true
+  - stage: test production
+    script: curl http://ci-dice-svalenciaz-production.herokuapp.com
+notifications:
+  slack:
+    secure: IxmYrno1fXMS1SITGT5IYJxeIxlMyQdL51YbqqayYYgStoGu5Zgl0/2EA/YP/tGfeCMng9Hb971lJMqUis+BBLdPqnKHD/wojm9roL+OzfvTSluwq2NpMF5E4TVTfZ9Qt9apGWtx53ORWBCDsQdZe2GL55FMNKF9M5dZ16gA1iqHvsDpsSBbqsHdgDVS6gEBIEwtvQe5q0JMkv7K6uB7YR6eVPsK4xyvpTPrjNwyNrE926QrY48kmHh1A+VVI0ezyg5DSlEpmUz/yZefQnlOWrOo9OXz7vQvT6DDZBez54j9tDUmwuquJ80r3BHcMCYNFE/qTzgNSs1DQhXvnSEpTMw0UEHruy7fuAR2MR9sMP0SoldyNAlEIf4sW+1BaIUQZHuMQ6gXqXKXI/UUVVf8iXsqVHCRJLgVoq7X+iGk1xwD0/C8uqXlEZvcVhuIyn+qjWjQrkY1cTURZxU/RHYWIj6xk2utCGkYVdyIovscvj9Eq8PAyUDvQ8Nf+Ril4ZmsL51zI0k29fB3++Jn5QUmD0AUKfuE1PGquj+UkhPJnxYQ9EnJ5rYQT2XQUqipS6ng+KwRpOjRinRNLlxmgaz65wgd1DUi7/rAiCBDBlhtkknMKUhaEmbC/vyLmNX1/z7tghDZmN6YRBhyAauxmOb3Aw0dChTQStxiSHuNnTaahFk=
