@@ -7,3 +7,24 @@ install:
 
 script:
   - python3 -m pytest -v tests/test_dice.py
+
+
+jobs:
+  include:
+    - stage: unit tests
+      script: python3 -m pytest -v tests/test_dice.py
+    - stage: deploy to staging
+      script: skip
+      deploy: &heroku
+        provider: heroku
+        app: ci-dice-svalenciaz-staging
+        api_key: $HEROKU_AUTH_TOKEN
+    - stage: test staging
+      script: 'curl http://ci-dice-svalenciaz-staging.herokuapp.com'
+    - stage: deploy to production
+      script: skip
+      deploy:
+        <<: *heroku
+        app: ci-dice-svalenciaz-production
+    - stage: test production
+      script: 'curl http://ci-dice-svalenciaz-production.herokuapp.com'
