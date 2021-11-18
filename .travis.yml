@@ -18,17 +18,17 @@ jobs:
       api_key: "$HEROKU_AUTH_TOKEN"
       on:
         all_branches: true
-  - stage: test staging
+  - stage: Test staging
     script: curl http://ci-dice-svalenciaz-staging.herokuapp.com
-  - stage: deploy to production
+  - stage: Deploy to production
     script: skip
     deploy:
       provider: heroku
       app: ci-dice-svalenciaz-production
       api_key: "$HEROKU_AUTH_TOKEN"
       on:
-        all_branches: true
-  - stage: test production
+      - branch: main
+  - stage: Test production
     script: curl http://ci-dice-svalenciaz-production.herokuapp.com
 notifications:
   slack:
